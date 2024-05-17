@@ -1,0 +1,20 @@
+@import url("./classes");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border list-none p-0 m-0 scroll-smooth;
+  }
+
+  body {
+    @apply bg-dark-1 text-white min-h-screen font-inter;
+  }
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+  .favIcon {
+    @apply h-10 w-10 bg-white;
+  }
+}
