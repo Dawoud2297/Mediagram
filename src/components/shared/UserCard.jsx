@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import useGetImage from '../../hooks/useGetImage'
 
 const UserCard = ({ user }) => {
+
     const userImgUrl = useGetImage(user?.imageId || "");
-    console.log(user)
+
+
     return (
         <Link to={`/profile/${user.$id}`} className='user-card'>
             <img

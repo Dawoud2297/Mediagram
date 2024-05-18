@@ -13,6 +13,7 @@ import { createPostError } from '../../utils/response'
 import useGetImage from '../../hooks/useGetImage'
 
 const UpdateProfile = () => {
+    /**Hooks */
     const { id } = useParams();
     const { user, setUser } = useUserContext();
     const { data: currentUser } = useGetUserById(id || "");
@@ -23,6 +24,7 @@ const UpdateProfile = () => {
     const navigate = useNavigate();
     const preservedValues = useMemo(() => user, [user]);
 
+    /**Form */
     const {
         register,
         handleSubmit,
@@ -39,16 +41,13 @@ const UpdateProfile = () => {
         },
     })
 
-    console.log(preservedValues)
-    console.log(errors)
-    console.log({ user, currentUser })
-
     if (!currentUser)
         return (
             <div className="flex-center w-full h-full">
                 <Loader />
             </div>
         );
+
 
 
     const onSubmit = async (data) => {
@@ -70,7 +69,6 @@ const UpdateProfile = () => {
             file: data.file,
             imageId: imageUrl
         });
-        console.log(imageUrl)
 
         if (!updatedUser) {
             createPostError('Update user failed. Please try again.');
@@ -142,13 +140,6 @@ const UpdateProfile = () => {
                         error={errors.email?.message}
                         disabled
                     />
-                    {/* <Input
-                        type="password"
-                        label="password"
-                        className="post_form-input"
-                        id="password"
-                        register={register}
-                    /> */}
                     <textarea
                         id="bio"
                         {...register('bio')}
@@ -172,7 +163,7 @@ const UpdateProfile = () => {
                             {(isLoadingUpdate || isSubmitting) ? <Loader
                                 height="24"
                                 width="24"
-                                message="Loading..." /> : 'Update Profile'
+                                message="Updating..." /> : 'Update Profile'
                             }
                         </button>
                     </div>

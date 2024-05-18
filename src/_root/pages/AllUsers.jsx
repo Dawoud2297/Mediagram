@@ -1,10 +1,15 @@
 import Loader from '../../components/shared/Loader';
 import UserCard from '../../components/shared/UserCard'
+import { useUserContext } from '../../context/AuthContext';
 import { useGetUsers } from '../../lib/react-query/qAndMutations'
 
 
 const AllUsers = () => {
+
     const { data: creators, isLoading, isError } = useGetUsers();
+    const { user } = useUserContext();
+
+    const allUsers = creators?.documents.filter((creator) => creator.$id !== user.id)
 
     if (isError) {
         return (
@@ -27,7 +32,7 @@ const AllUsers = () => {
                     ) : (
                         <ul className='user-grid'>
                             {
-                                creators?.documents.map((creator) => (
+                                allUsers.map((creator) => (
                                     <li
                                         key={creator?.$id}
                                         className='flex min-w-[200px] w-full'

@@ -3,7 +3,6 @@ import SinglePostInGridList from './SinglePostInGridList';
 const GridPostList = ({ posts, showUser = true, showStats = true }) => {
 
     return (
-
         <ul className='grid-container'>
             {
                 posts.map((post) => (

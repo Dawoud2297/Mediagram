@@ -15,7 +15,7 @@ const PostForm = ({ post, action }) => {
 
     const imgUrlValue = post ? post?.imageUrl : "";
     const imgUrl = useGetImage(imgUrlValue)
-    // Form
+    /**Form*/
     const {
         register,
         handleSubmit,

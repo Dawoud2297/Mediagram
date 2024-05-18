@@ -10,16 +10,20 @@ import { authError } from '../../utils/response'
 
 
 const SignIn = () => {
+
+    /**Form */
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting }
     } = useForm({ resolver: zodResolver(SigninValidation) })
+    /**Hooks */
     const navigate = useNavigate();
     const { checkAuthUser } = useUserContext();
     const { mutateAsync: signinAccount, isPending: isSigningIn } =
         useSignInAccount();
 
+    /**On Submit */
     const onSubmit = async (data) => {
         const session = await signinAccount(data);
         if (session.error) {

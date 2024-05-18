@@ -4,15 +4,14 @@ import Loader from '../../components/shared/Loader';
 import GridPostList from '../../components/shared/GridPostList';
 
 const Saved = () => {
-    const { data: currentUser } = useGetCurrentUser()
 
+    const { data: currentUser } = useGetCurrentUser();
     const savedPosts = currentUser?.save.map((savedPost) => ({
         ...savedPost.post,
         creator: {
             imageUrl: currentUser.imageUrl
         }
-    }))
-        .reverse();
+    })).reverse();
 
     return (
         <div className='saved-container'>

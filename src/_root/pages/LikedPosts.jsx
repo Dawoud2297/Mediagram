@@ -2,6 +2,7 @@ import { useGetCurrentUser } from '../../lib/react-query/qAndMutations'
 import GridPostList from '../../components/shared/GridPostList';
 
 const LikedPosts = () => {
+
     const { data: currentUser } = useGetCurrentUser();
 
     if (!currentUser) {

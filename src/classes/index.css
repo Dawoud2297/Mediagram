@@ -119,10 +119,10 @@
   /* Shared Components */
   /* Topbar */
   .top-bar {
-    @apply sticky top-0 z-50 shadow-inner sm:hidden bg-dark-2 w-[95%] h-[80px] rounded-xl ml-[10px];
+    @apply sticky top-0 z-50 shadow-inner sm:hidden bg-dark-3 w-[95%] h-[80px] rounded-xl ml-[10px];
   }
   .top-bar_logo {
-    @apply w-full h-20 ml-0 col-span-1 mr-auto;
+    @apply w-full h-20;
   }
   /* Left Side Bar */
   .leftside-bar {

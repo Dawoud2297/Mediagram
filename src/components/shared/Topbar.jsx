@@ -4,6 +4,7 @@ import { signOutAccount } from '../../lib/appwrite/api'
 import useGetImage from '../../hooks/useGetImage';
 
 const Topbar = () => {
+
     const { user } = useUserContext();
     const imgUrl = useGetImage(user?.imageId);
     const navigate = useNavigate();
@@ -17,8 +18,8 @@ const Topbar = () => {
 
     return (
         <section className='top-bar'>
-            <div className='flex-between px-5'>
-                <Link to="/" className='flex-start'>
+            <div className='flex-between pr-5'>
+                <Link to="/" className='flex gap-5 items-center justify-start'>
                     <img
                         src='/assets/images/m2.svg'
                         alt='logo'

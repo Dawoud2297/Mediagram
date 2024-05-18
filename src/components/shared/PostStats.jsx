@@ -33,7 +33,6 @@ const PostStats = ({ post, userId }) => {
         }
         setLikes(likesArray);
         likePost({ postId: post.$id, likesArray }) // React Query
-        // likePost(post.$id, likesArray) //Directly from API
     }
 
     /**

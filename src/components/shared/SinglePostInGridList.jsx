@@ -4,6 +4,7 @@ import { useUserContext } from '../../context/AuthContext'
 import PostStats from './PostStats'
 
 const SinglePostInGridList = ({ post, showUser, showStats }) => {
+
     const imgUrl = useGetImage(post.imageUrl)
     const profileImgUrl = useGetImage(post.creator?.imageId || "")
     const { user } = useUserContext()

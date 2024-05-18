@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { authError } from '../../utils/response'
 
 const SignUp = () => {
+
+    /**Form */
     const {
         register,
         handleSubmit,
@@ -15,14 +17,13 @@ const SignUp = () => {
         formState: { errors, isSubmitting }
     } = useForm({ resolver: zodResolver(SignupValidation) })
 
+    /**Hooks */
     // isPending is used for api errors
     const { mutateAsync: createUserAccount, isPending } = useCreateUserAccount();
-
-
-
     const navigate = useNavigate();
 
 
+    /**On Submit */
     const onSubmit = async (data) => {
         const newUser = await createUserAccount(data);
         if (newUser.error) {

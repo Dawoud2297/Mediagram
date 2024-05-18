@@ -4,6 +4,7 @@ import { useGetRecentPosts } from "../../lib/react-query/qAndMutations";
 
 
 const Home = () => {
+
     const { data: posts, isPending } = useGetRecentPosts()
 
 

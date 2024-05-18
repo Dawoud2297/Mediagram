@@ -4,6 +4,7 @@ import { useGetPostById } from '../../lib/react-query/qAndMutations';
 import Loader from '../../components/shared/Loader';
 
 const EditPost = () => {
+
     const { id } = useParams();
     const { data: post, isPending } = useGetPostById(id);
 

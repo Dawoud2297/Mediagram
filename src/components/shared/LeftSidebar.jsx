@@ -12,8 +12,6 @@ const LeftSidebar = () => {
     const imageUrl = useGetImage(user.imageId || "");
     const navigate = useNavigate();
 
-    console.log(user)
-
     const signOutUser = () => {
         signOutAccount();
         navigate("/log-in");
@@ -28,7 +26,7 @@ const LeftSidebar = () => {
                 {
                     isLoading || !user.email ? (
                         <div className='h-14'>
-                            <Loader message="Wait..." />
+                            <Loader message="" />
                         </div>
                     ) : (
                         <Link

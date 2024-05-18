@@ -36,8 +36,7 @@ export default function AuthProvider({ children }) {
 
             if (currentAccount) {
                 setUser({
-                    id: currentAccount.$id, //accountId
-                    // id: currentAccount.accountId,
+                    id: currentAccount.$id,
                     name: currentAccount.name,
                     username: currentAccount.username,
                     email: currentAccount.email,
@@ -47,8 +46,7 @@ export default function AuthProvider({ children }) {
                 });
                 setIsAuthenticated(true);
                 return true;
-            }
-            return false;
+            } else return false;
         } catch (error) {
             console.log(error);
             return false;

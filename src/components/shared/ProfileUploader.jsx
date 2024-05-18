@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone';
 
 const ProfileUploader = ({ fieldChange, mediaUrl }) => {
+
     const [file, setFile] = useState([])
     const [fileUrl, setFileUrl] = useState(mediaUrl)
 
