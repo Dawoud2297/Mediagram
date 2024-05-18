@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Input from '../../components/ui/Input'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,7 +8,7 @@ import { ProfileValidation } from '../../lib/validation'
 import { useGetUserById, useUpdateUser } from '../../lib/react-query/qAndMutations'
 import ProfileUploader from '../../components/shared/ProfileUploader'
 import Loader from '../../components/shared/Loader'
-import { uploadUserImage } from '../../lib/firebase/api'
+import { deleteImage, uploadUserImage } from '../../lib/firebase/api'
 import { createPostError } from '../../utils/response'
 import useGetImage from '../../hooks/useGetImage'
 
@@ -17,12 +17,12 @@ const UpdateProfile = () => {
     const { user, setUser } = useUserContext();
     const { data: currentUser } = useGetUserById(id || "");
     const imageId = useGetImage(currentUser?.imageId || "");
-    const mediaUrl = imageId ? imageId
-        :
-        (user?.imageUrl ? user?.imageUrl : '/assets/icons/profile-placeholder.svg')
+    const mediaUrl = imageId ? imageId : user?.imageUrl;
 
     const { mutateAsync: updateUser, isLoading: isLoadingUpdate } = useUpdateUser();
     const navigate = useNavigate();
+    const preservedValues = useMemo(() => user, [user]);
+
     const {
         register,
         handleSubmit,
@@ -31,14 +31,15 @@ const UpdateProfile = () => {
     } = useForm({
         resolver: zodResolver(ProfileValidation),
         defaultValues: {
+            name: preservedValues?.name,
+            username: preservedValues?.username,
+            email: preservedValues?.email,
+            bio: preservedValues?.bio || "",
             file: [],
-            name: user.name,
-            username: user.username,
-            email: user.email,
-            bio: user.bio || ""
         },
     })
 
+    console.log(preservedValues)
     console.log(errors)
     console.log({ user, currentUser })
 
@@ -51,17 +52,23 @@ const UpdateProfile = () => {
 
 
     const onSubmit = async (data) => {
-        const imageUrl = await uploadUserImage({
-            userId: user.id,
-            file: data.file[0]
-        })
+        let imageUrl = "";
+
+        if (data.file[0]) {
+            deleteImage(user.imageId);
+            imageUrl = await uploadUserImage({
+                userId: user.id,
+                file: data.file[0]
+            })
+        } else {
+            imageUrl = user.imageId;
+        }
         const updatedUser = await updateUser({
             userId: currentUser.$id,
             name: data.name,
             bio: data.bio,
             file: data.file,
-            imageId: imageUrl,
-            // password: data.password,
+            imageId: imageUrl
         });
         console.log(imageUrl)
 
@@ -96,7 +103,10 @@ const UpdateProfile = () => {
                         Edit Profile
                     </h2>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 gap-10 w-full'>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='grid grid-cols-2 gap-y-10 gap-x-5 md:gap-10 w-full'
+                >
                     <Controller
                         render={({ field }) =>
                             <ProfileUploader
@@ -108,25 +118,28 @@ const UpdateProfile = () => {
                     />
                     <Input
                         type="text"
-                        label="name"
+                        label="Name"
                         className="post_form-input"
                         id="name"
                         register={register}
+                        error={errors.name?.message}
                     />
                     <Input
                         type="text"
-                        label="username"
+                        label="Username"
                         className="post_form-input"
                         id="username"
                         register={register}
+                        error={errors.username?.message}
                         disabled
                     />
                     <Input
                         type="email"
-                        label="email"
+                        label="Email"
                         className="post_form-input"
                         id="email"
                         register={register}
+                        error={errors.email?.message}
                         disabled
                     />
                     {/* <Input

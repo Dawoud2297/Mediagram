@@ -26,12 +26,9 @@ const Profile = () => {
     const { id } = useParams();
     const { user } = useUserContext();
     const { pathname } = useLocation();
-
     const { data: currentUser } = useGetUserById(id || "");
-    // const imageUrl = useGetImage(currentUser?.imageUrl);
-    const imageUrl = useGetImage(currentUser?.imageId || "");
+    const imageUrl = useGetImage(user?.imageId || "");
 
-    console.log(currentUser)
 
     if (!currentUser)
         return (

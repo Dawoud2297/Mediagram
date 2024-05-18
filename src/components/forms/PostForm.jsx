@@ -32,7 +32,6 @@ const PostForm = ({ post, action }) => {
     })
     const navigate = useNavigate();
 
-    console.log(errors)
 
     // Submit Post Data
     const { mutateAsync: createPost, isPending: isCreating } = useCreatePost();

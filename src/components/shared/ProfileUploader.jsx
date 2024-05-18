@@ -29,7 +29,8 @@ const ProfileUploader = ({ fieldChange, mediaUrl }) => {
 
     return (
         <div {...getRootProps()}
-            className="col-span-2 flex bg-dark-4 p-5 rounded-xl cursor-pointer"
+            className="flex cursor-pointer"
+        // className="col-span-2 flex bg-dark-4 p-5 rounded-xl cursor-pointer"
         >
             <input {...getInputProps()} className="w-1/2" />
 
@@ -39,7 +40,7 @@ const ProfileUploader = ({ fieldChange, mediaUrl }) => {
                     alt="image"
                     className="h-24 w-24 rounded-full object-cover object-top"
                 />
-                <p className=" text-white font-semibold base-medium md:bbase-semibold">
+                <p className="text-white hidden font-semibold base-medium md:bbase-semibold md:flex">
                     Change profile photo
                 </p>
             </div>

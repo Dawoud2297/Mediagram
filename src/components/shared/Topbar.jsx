@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useUserContext } from '../../context/AuthContext'
 import { signOutAccount } from '../../lib/appwrite/api'
+import useGetImage from '../../hooks/useGetImage';
 
 const Topbar = () => {
-    const { user } = useUserContext()
+    const { user } = useUserContext();
+    const imgUrl = useGetImage(user?.imageId);
     const navigate = useNavigate();
 
 
@@ -15,13 +17,12 @@ const Topbar = () => {
 
     return (
         <section className='top-bar'>
-            <div className='flex-between py-4 px-5'>
-                <Link to="/" className='flex gap-3 items-center'>
+            <div className='flex-between px-5'>
+                <Link to="/" className='flex-start'>
                     <img
-                        src='/assets/images/logo.svg'
+                        src='/assets/images/m2.svg'
                         alt='logo'
-                        width={130}
-                        height={325}
+                        className='top-bar_logo'
                     />
                 </Link>
                 <div className='flex gap-4'>
@@ -31,10 +32,10 @@ const Topbar = () => {
                     <Link to={`/profile/${user.id}`} className='flex-center gap-3'>
                         <img
                             src={
-                                user.imageUrl || '/assets/icons/profile-placeholder.svg'
+                                imgUrl ? imgUrl : (user.imageUrl ? user.imageUrl : '/assets/icons/profile-placeholder.svg')
                             }
                             alt='profile'
-                            className='h-8 w-8 rounded-full'
+                            className=' h-10 w-10 ml-5 rounded-full'
                         />
                     </Link>
                 </div>
