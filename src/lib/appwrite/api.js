@@ -26,7 +26,7 @@ export async function createUserAccount(user) {
 
         return newUser;
     } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         return { error: error.message }
     }
 }
@@ -43,7 +43,7 @@ export async function saveUserToDB(newUserData) {
         )
         return newUser;
     } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         return { error: error.message }
     }
 }
@@ -53,7 +53,7 @@ export async function signInAccount(user) {
         const session = await account.createEmailPasswordSession(user.email, user.password);
         return session;
     } catch (error) {
-        console.log(error.message)
+        // console.log(error.message)
         return { error: error.message };
     }
 }
@@ -93,7 +93,7 @@ export async function getUsers(limit) {
 
         return users;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -111,7 +111,7 @@ export async function getUserById(userId) {
 
         return user;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -131,7 +131,7 @@ export async function getCurrentUser() {
         if (!currentUser) throw Error;
         return currentUser.documents[0];
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message };
     }
 }
@@ -144,7 +144,7 @@ export async function signOutAccount() {
 
         return session;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message };
     }
 }
@@ -173,7 +173,7 @@ export async function createPost(post) {
         }
         return newPost;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -207,7 +207,7 @@ export async function likePost(likesData) {
         if (!updatedPost) throw Error;
         return updatedPost
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -230,7 +230,7 @@ export async function savePost(savePostData) {
         if (!updatedPost) throw Error;
         return updatedPost
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -249,7 +249,7 @@ export async function deleteSavedPost(savedRecordId) {
         if (!statusCode) throw Error;
         return { status: "ok" }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -266,7 +266,7 @@ export async function getPostById(postId) {
         )
         return post
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -295,7 +295,7 @@ export async function UpdatePost(post) {
         }
         return updatedPost;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -310,7 +310,7 @@ export async function deletePost(postId) {
             postId
         )
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -335,7 +335,7 @@ export async function getInfinitePosts({ pageParam }) {
 
         return posts;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -355,7 +355,7 @@ export async function searchPosts(searchTerm) {
 
         return posts;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return { error: error.message }
     }
 }
@@ -385,6 +385,6 @@ export async function updateUser(user) {
 
         return updatedUser;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }

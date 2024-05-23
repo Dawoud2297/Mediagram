@@ -5,23 +5,24 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import Bottombar from '../components/shared/Bottombar'
 import { useUserContext } from '../context/AuthContext'
 import { signOutAccount } from '../lib/appwrite/api'
+import { useGetCurrentUser } from '../lib/react-query/qAndMutations'
 
 const RootLayout = () => {
     // BUG : Logs Out on refresh page
     const { user } = useUserContext();
+    const { data: currentUser } = useGetCurrentUser();
+
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        const logOut = setTimeout(() => {
-            if (!user.id) {
-                signOutAccount();
-                navigate("/log-in")
-            }
-        }, 10000)
-        return () => clearTimeout(logOut);
 
-    }, [navigate, user.id])
+        if (currentUser?.error && !user.id) {
+            signOutAccount();
+            navigate("/log-in")
+        }
+
+    }, [currentUser?.error, navigate, user.id])
+
 
     return (
         <div className="w-full md:flex h-screen">

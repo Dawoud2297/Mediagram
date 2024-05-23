@@ -39,7 +39,7 @@ const SinglePostInGridList = ({ post, showUser, showStats }) => {
                 }
                 {
                     showStats &&
-                    <span className={!showUser && 'w-full'}>
+                    <span className={!showUser ? 'w-full' : ''}>
                         <PostStats post={post} userId={user.id} />
                     </span>
                 }

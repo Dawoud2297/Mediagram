@@ -38,7 +38,7 @@ const PostStats = ({ post, userId }) => {
     /**
      Handle Save Post
      **/
-    const savedPostRecord = currentUser?.save.find(
+    const savedPostRecord = currentUser?.save?.find(
         (record) => record.post?.$id === post.$id
     );
 

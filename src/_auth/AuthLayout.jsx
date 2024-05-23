@@ -1,6 +1,16 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
+import { useUserContext } from "../context/AuthContext";
+import { useEffect } from "react";
 
 const AuthLayout = () => {
+    const { user } = useUserContext();
+    const navigate = useNavigate();
+
+    console.log(user)
+
+    useEffect(() => {
+        if (user.id) navigate("/")
+    })
 
     return (
         <div className="flex h-screen">
