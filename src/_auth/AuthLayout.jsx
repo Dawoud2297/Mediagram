@@ -10,7 +10,7 @@ const AuthLayout = () => {
 
     useEffect(() => {
         if (user.id) navigate("/")
-    })
+    }, [])
 
     return (
         <div className="flex h-screen">
