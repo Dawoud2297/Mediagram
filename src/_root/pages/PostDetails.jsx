@@ -9,6 +9,7 @@ import { deleteImage } from '../../lib/firebase/api';
 import { successMessage } from '../../utils/response';
 import { useState } from 'react';
 import WarningMessage from '../../components/shared/WarningMessage';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const PostDetails = () => {
 
@@ -30,6 +31,8 @@ const PostDetails = () => {
         navigate(-1);
         setInsureToDelete(false);
     }
+
+    useDocumentTitle("Mediagram/Post-Details")
 
     return (
         <>

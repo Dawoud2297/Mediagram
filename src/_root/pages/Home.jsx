@@ -1,11 +1,14 @@
 import Loader from "../../components/shared/Loader";
 import PostCard from "../../components/shared/PostCard";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 import { useGetRecentPosts } from "../../lib/react-query/qAndMutations";
 
 
 const Home = () => {
 
     const { data: posts, isPending } = useGetRecentPosts()
+
+    useDocumentTitle("Mediagram")
 
 
     return (

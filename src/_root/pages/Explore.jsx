@@ -5,6 +5,7 @@ import { useGetPosts, useSearchPosts } from '../../lib/react-query/qAndMutations
 import useDebounce from '../../hooks/useDebounce';
 import Loader from '../../components/shared/Loader';
 import { useInView } from 'react-intersection-observer';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const Explore = () => {
     const {
@@ -22,6 +23,7 @@ const Explore = () => {
         if (inView && !searchValue) fetchNextPage();
     }, [inView, searchValue])
 
+    useDocumentTitle("Mediagram/Explore")
 
     if (!posts) {
         return (
@@ -35,6 +37,7 @@ const Explore = () => {
     const shouldShowPosts = !shouldShowSearchResults && posts.pages.every(
         (item) => item.documents?.length === 0
     );
+
 
 
     return (

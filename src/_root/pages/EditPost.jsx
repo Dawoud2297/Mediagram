@@ -2,16 +2,19 @@ import { useParams } from 'react-router-dom'
 import PostForm from '../../components/forms/PostForm'
 import { useGetPostById } from '../../lib/react-query/qAndMutations';
 import Loader from '../../components/shared/Loader';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const EditPost = () => {
 
     const { id } = useParams();
     const { data: post, isPending } = useGetPostById(id);
 
+    useDocumentTitle("Mediagram/Edit-Post")
 
     if (isPending) return <div className='flex flex-1 flex-center'>
         <Loader height={50} width={50} />
-    </div>
+    </div>;
+
 
 
     return (

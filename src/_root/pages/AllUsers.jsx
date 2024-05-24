@@ -1,6 +1,7 @@
 import Loader from '../../components/shared/Loader';
 import UserCard from '../../components/shared/UserCard'
 import { useUserContext } from '../../context/AuthContext';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { useGetUsers } from '../../lib/react-query/qAndMutations'
 
 
@@ -10,6 +11,8 @@ const AllUsers = () => {
     const { user } = useUserContext();
 
     const allUsers = creators?.documents.filter((creator) => creator.$id !== user.id)
+
+    useDocumentTitle("Mediagram/People")
 
     if (isError) {
         return (
@@ -21,6 +24,7 @@ const AllUsers = () => {
             </div>
         )
     }
+
 
     return (
         <div className='common-container'>

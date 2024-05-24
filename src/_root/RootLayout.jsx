@@ -13,7 +13,6 @@ const RootLayout = () => {
         const checkUserSession = () => {
             getCurrentUser().then((res) => {
                 setUser(res)
-                console.log(res)
             });
         }
         checkUserSession()

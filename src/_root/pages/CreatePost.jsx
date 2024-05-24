@@ -1,6 +1,9 @@
 import PostForm from '../../components/forms/PostForm'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const CreatePost = () => {
+
+    useDocumentTitle("Mediagram/Create-Post")
 
     return (
         <div className='flex flex-1'>

@@ -13,6 +13,7 @@ import GridPostList from "../../components/shared/GridPostList";
 import Loader from "../../components/shared/Loader";
 import { useGetUserById } from "../../lib/react-query/qAndMutations";
 import useGetImage from "../../hooks/useGetImage";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 // Still under working
 const StatBlock = ({ value, label }) => (
@@ -31,6 +32,7 @@ const Profile = () => {
     const { data: currentUser } = useGetUserById(id || "");
     const imageUrl = useGetImage(currentUser?.imageId || "");
 
+    useDocumentTitle(`Mediagram/@${currentUser?.username}`)
 
     if (!currentUser)
         return (
@@ -38,6 +40,8 @@ const Profile = () => {
                 <Loader />
             </div>
         );
+
+
 
     return (
         <div className="profile-container">

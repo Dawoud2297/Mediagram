@@ -11,6 +11,7 @@ import Loader from '../../components/shared/Loader'
 import { deleteImage, uploadUserImage } from '../../lib/firebase/api'
 import { createPostError } from '../../utils/response'
 import useGetImage from '../../hooks/useGetImage'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const UpdateProfile = () => {
     /**Hooks */
@@ -40,6 +41,8 @@ const UpdateProfile = () => {
             file: [],
         },
     })
+
+    useDocumentTitle("Mediagram/Update-Data")
 
     if (!currentUser)
         return (
@@ -84,8 +87,6 @@ const UpdateProfile = () => {
         });
         return navigate(`/profile/${id}`);
     }
-
-
 
     return (
         <div className='flex flex-1'>

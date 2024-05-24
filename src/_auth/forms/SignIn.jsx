@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import { SigninValidation } from "../../lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authError } from '../../utils/response'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 
 const SignIn = () => {
@@ -38,6 +39,8 @@ const SignIn = () => {
             }
         }
     }
+
+    useDocumentTitle("Mediagram/Log-In")
 
 
     return (

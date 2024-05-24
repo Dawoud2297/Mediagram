@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { SignupValidation } from "../../lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authError } from '../../utils/response'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const SignUp = () => {
 
@@ -33,6 +34,7 @@ const SignUp = () => {
         }
     }
 
+    useDocumentTitle("Mediagram/Sign-Up")
 
     return (
         <div className="form-container">

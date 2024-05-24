@@ -2,6 +2,7 @@ import React from 'react'
 import { useGetCurrentUser } from '../../lib/react-query/qAndMutations'
 import Loader from '../../components/shared/Loader';
 import GridPostList from '../../components/shared/GridPostList';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const Saved = () => {
 
@@ -12,6 +13,9 @@ const Saved = () => {
             imageUrl: currentUser.imageUrl
         }
     })).reverse();
+
+    useDocumentTitle("Mediagram/Saved-Posts")
+
 
     return (
         <div className='saved-container'>
