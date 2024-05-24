@@ -1,21 +1,40 @@
-import { Outlet, useNavigate } from "react-router-dom"
-import { useUserContext } from "../context/AuthContext";
-import { useEffect } from "react";
+import { Link, Outlet } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { getCurrentUser, signOutAccount } from "../lib/appwrite/api";
 
 const AuthLayout = () => {
-    const { user } = useUserContext();
-    const navigate = useNavigate();
+    const [user, setUser] = useState({})
 
-    console.log(user)
+    const signOutUser = async () => {
+        await signOutAccount();
+        window.location.reload();
+    }
 
     useEffect(() => {
-        if (user.id) navigate("/")
+        const checkUserSession = () => {
+            getCurrentUser().then((res) => {
+                setUser(res)
+                console.log(res)
+            });
+        }
+        checkUserSession()
     }, [])
+
 
     return (
         <div className="flex h-screen">
             <section className="formContainer">
-                <Outlet />
+                {
+                    !user?.error && user?.$id ? (
+                        <div className="flex flex-col gap-20 border-4 p-10 rounded-xl border-dark-4 text-xl">
+                            <Link to="/" className="bg-dark-4 p-5 rounded-xl hover:bg-dark-3">Back To Home</Link>
+                            <button onClick={signOutUser} className="p-5 rounded-xl hover:bg-dark-3">Logout</button>
+                        </div>
+                    )
+                        : (
+                            <Outlet />
+                        )
+                }
             </section>
             <video
                 className="sideImg"

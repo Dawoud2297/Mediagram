@@ -1,35 +1,37 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Topbar from '../components/shared/Topbar'
 import LeftSidebar from '../components/shared/LeftSidebar'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import Bottombar from '../components/shared/Bottombar'
-import { useUserContext } from '../context/AuthContext'
-import { signOutAccount } from '../lib/appwrite/api'
-import { useGetCurrentUser } from '../lib/react-query/qAndMutations'
+import { getCurrentUser } from '../lib/appwrite/api'
 
 const RootLayout = () => {
     // BUG : Logs Out on refresh page
-    const { user } = useUserContext();
-    const { data: currentUser } = useGetCurrentUser();
-
-    const navigate = useNavigate();
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-
-        if (currentUser?.error && !user.id) {
-            signOutAccount();
-            navigate("/log-in")
+        const checkUserSession = () => {
+            getCurrentUser().then((res) => {
+                setUser(res)
+                console.log(res)
+            });
         }
-
-    }, [currentUser?.error, navigate, user.id])
-
+        checkUserSession()
+    }, [])
 
     return (
         <div className="w-full md:flex h-screen">
             <Topbar />
             <LeftSidebar />
             <section className="flex flex-1 h-full">
-                <Outlet />
+                {
+                    user?.error ? (
+                        <Navigate to="/log-in" />
+                    )
+                        : (
+                            <Outlet />
+                        )
+                }
             </section>
             <Bottombar />
         </div>

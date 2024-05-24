@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import AuthLayout from "./_auth/AuthLayout"
 import SignUp from "./_auth/forms/SignUp"
 import SignIn from "./_auth/forms/SignIn"
@@ -33,6 +33,7 @@ function App() {
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
           <Route path="/liked-posts" element={<LikedPosts />} />
         </Route>
+        <Route path="*" element={<Navigate to="/log-in" replace />} />
       </Routes>
       <ToastContainer />
     </>
