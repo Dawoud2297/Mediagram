@@ -96,7 +96,7 @@ const SignUp = () => {
             </form>
             <p className="go-to">
                 <span>
-                    Already have an account?
+                    New User?
                 </span>
                 <Link to="/log-in" className="text-blue-950">
                     Log in
