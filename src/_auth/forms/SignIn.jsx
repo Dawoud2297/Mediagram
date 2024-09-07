@@ -80,7 +80,7 @@ const SignIn = () => {
             </form>
             <p className="go-to">
                 <span>
-                    Already have an account?
+                New Friend?
                 </span>
                 <Link to="/sign-up" className="text-blue-950">
                     Sign Up
